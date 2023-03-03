@@ -9,10 +9,12 @@ import io.radien.projections.data.repository.Repository;
 import io.radien.usermanagement.event.UserEvent;
 import io.smallrye.mutiny.Uni;
 import io.vertx.mutiny.core.eventbus.EventBus;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@ApplicationScoped
 public class UserProjectionRepository extends Repository<User, String> {
     private final Logger logger = LoggerFactory.getLogger(UserProjectionRepository.class);
 

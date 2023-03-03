@@ -71,7 +71,7 @@ public class SqsSubscriptionProducer {
 
     @PostConstruct
     public void subscribeToAll() {
-        subscribeToAll(EventStoreDBSubscriptionOptions.getDefault());
+        subscribeToAll(EventStoreDBSubscriptionOptions.getByStreamPrefix("User"));
     }
 
     @PreDestroy
@@ -141,7 +141,8 @@ public class SqsSubscriptionProducer {
 
         sqs.sendMessage(m -> {
             try {
-                m.queueUrl(queueUrl).messageBody(ENVELOPE_WRITER.writeValueAsString(streamEvent.get()));
+                m.queueUrl(queueUrl)
+                        .messageBody(ENVELOPE_WRITER.writeValueAsString(streamEvent.get()));
             } catch (JsonProcessingException e) {
                 //TODO: ex
                 throw new RuntimeException(e);

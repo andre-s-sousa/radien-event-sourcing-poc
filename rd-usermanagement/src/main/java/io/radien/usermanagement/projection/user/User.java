@@ -7,6 +7,8 @@ import io.radien.projections.data.model.VersionedView;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.ParamDef;
 
 @Entity
 public class User implements VersionedView {
