@@ -39,19 +39,18 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>${quarkus.platform.group-id}</groupId>
-                <artifactId>quarkus-maven-plugin</artifactId>
-                <version>${quarkus.platform.version}</version>
-                <extensions>true</extensions>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>build</goal>
-                            <goal>generate-code</goal>
-                            <goal>generate-code-tests</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${version.maven-jar-plugin}</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <app-version>${project.version}</app-version>
+                            <!--suppress UnresolvedMavenProperty -->
+                            <build-number>${buildNumber}</build-number>
+                            <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
