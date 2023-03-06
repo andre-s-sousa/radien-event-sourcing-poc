@@ -1,25 +1,24 @@
-package io.radien.usermanagement.datalayer;
+package io.radien.tenantmanagement.datalayer;
 
 import io.radien.eventsourcing.client.EventStoreClientWrapper;
 import io.radien.eventsourcing.store.EntityStore;
-import io.radien.usermanagement.domain.SystemUser;
-import io.radien.usermanagement.event.UserEvent;
+import io.radien.tenantmanagement.domain.SystemTenant;
+import io.radien.tenantmanagement.event.TenantEvent;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 @ApplicationScoped
-public class UserEventEntityStore {
-
+public class TenantEventEntityStore {
     @Inject
     EventStoreClientWrapper dbClient;
 
     @ApplicationScoped
-    EntityStore<SystemUser, UserEvent> userEntityStore() {
+    EntityStore<SystemTenant, TenantEvent> userEntityStore() {
         return new EntityStore<>(
                 dbClient.getClient(),
-                SystemUser::when,
-                SystemUser::mapToStreamId,
-                SystemUser::empty
+                SystemTenant::when,
+                SystemTenant::mapToStreamId,
+                SystemTenant::empty
         );
     }
 }

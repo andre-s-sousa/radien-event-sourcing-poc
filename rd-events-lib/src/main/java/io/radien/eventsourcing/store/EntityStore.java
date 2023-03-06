@@ -34,7 +34,7 @@ public class EntityStore<T, E> {
         this.getDefault = getDefault;
     }
 
-    Optional<T> get(UUID id) {
+    public Optional<T> get(UUID id) {
         var streamId = mapToStreamId.apply(id);
 
         var events = getEvents(streamId);

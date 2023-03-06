@@ -10,6 +10,7 @@
     <module>rd-events-lib</module>
     <module>rd-projection-data-lib</module>
     <module>rd-usermanagement</module>
+    <module>rd-tenantmanagement</module>
   </modules>
   <properties>
     <compiler-plugin.version>3.10.1</compiler-plugin.version>

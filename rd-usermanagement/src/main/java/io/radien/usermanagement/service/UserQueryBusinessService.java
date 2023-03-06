@@ -2,10 +2,6 @@ package io.radien.usermanagement.service;
 
 import io.quarkus.hibernate.reactive.panache.PanacheQuery;
 import io.quarkus.panache.common.Page;
-import io.quarkus.panache.common.Parameters;
-import io.radien.eventsourcing.checkpoint.EventStoreSubscriptionCheckpointRepository;
-import io.radien.eventsourcing.store.EntityStore;
-import io.radien.projections.data.repository.Repository;
 import io.radien.usermanagement.projection.user.User;
 import io.radien.usermanagement.projection.user.UserProjectionRepository;
 import io.radien.usermanagement.query.UserQueries;
