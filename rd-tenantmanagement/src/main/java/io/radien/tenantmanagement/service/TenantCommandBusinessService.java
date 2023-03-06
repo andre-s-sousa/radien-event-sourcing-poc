@@ -4,25 +4,27 @@ import io.radien.eventsourcing.core.ETag;
 import io.radien.eventsourcing.store.EntityStore;
 import io.radien.tenantmanagement.domain.SystemTenant;
 import io.radien.tenantmanagement.event.TenantEvent;
-import io.radien.tenantmanagement.handler.CreateClientTenant;
-import io.radien.tenantmanagement.handler.CreateRootTenant;
-import io.radien.tenantmanagement.handler.CreateSubTenant;
-import io.radien.tenantmanagement.handler.DeleteTenant;
-import io.radien.tenantmanagement.handler.UpdateTenantClientAddress;
-import io.radien.tenantmanagement.handler.UpdateTenantClientCity;
-import io.radien.tenantmanagement.handler.UpdateTenantClientCountry;
-import io.radien.tenantmanagement.handler.UpdateTenantClientEmail;
-import io.radien.tenantmanagement.handler.UpdateTenantClientPhoneNumber;
-import io.radien.tenantmanagement.handler.UpdateTenantClientZipCode;
-import io.radien.tenantmanagement.handler.UpdateTenantKey;
-import io.radien.tenantmanagement.handler.UpdateTenantName;
+import io.radien.tenantmanagement.handler.tenant.CreateClientTenant;
+import io.radien.tenantmanagement.handler.tenant.CreateRootTenant;
+import io.radien.tenantmanagement.handler.tenant.CreateSubTenant;
+import io.radien.tenantmanagement.handler.tenant.DeleteTenant;
+import io.radien.tenantmanagement.handler.tenant.UpdateTenantClientAddress;
+import io.radien.tenantmanagement.handler.tenant.UpdateTenantClientCity;
+import io.radien.tenantmanagement.handler.tenant.UpdateTenantClientCountry;
+import io.radien.tenantmanagement.handler.tenant.UpdateTenantClientEmail;
+import io.radien.tenantmanagement.handler.tenant.UpdateTenantClientPhoneNumber;
+import io.radien.tenantmanagement.handler.tenant.UpdateTenantClientZipCode;
+import io.radien.tenantmanagement.handler.tenant.UpdateTenantKey;
+import io.radien.tenantmanagement.handler.tenant.UpdateTenantName;
 import java.util.Optional;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 @RequestScoped
 public class TenantCommandBusinessService {
     @Inject
+    @Named("tenantEntityStore")
     EntityStore<SystemTenant, TenantEvent> store;
 
     public ETag createTenant(CreateRootTenant command) {

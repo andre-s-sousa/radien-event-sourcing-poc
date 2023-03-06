@@ -1,4 +1,4 @@
-package io.radien.tenantmanagement.handler;
+package io.radien.tenantmanagement.handler.tenant;
 
 import io.radien.tenantmanagement.domain.SystemTenant;
 import io.radien.tenantmanagement.event.TenantEvent;

@@ -1,11 +1,11 @@
-package io.radien.tenantmanagement.handler;
+package io.radien.tenantmanagement.handler.tenant;
 
 import io.radien.tenantmanagement.domain.SystemTenant;
 import io.radien.tenantmanagement.event.TenantEvent;
 import java.util.UUID;
 
-public record UpdateTenantClientAddress(UUID tenantId, String clientCity, Long expectedVersion) {
-    public static TenantEvent.TenantClientCityUpdated handle(UpdateTenantClientAddress command, SystemTenant tenant) {
+public record UpdateTenantClientCity(UUID tenantId, String clientCity, Long expectedVersion) {
+    public static TenantEvent.TenantClientCityUpdated handle(UpdateTenantClientCity command, SystemTenant tenant) {
         if(!(tenant instanceof SystemTenant.ClientTenant)) {
             throw new IllegalStateException("Provided tenant is not of type Client");
         }

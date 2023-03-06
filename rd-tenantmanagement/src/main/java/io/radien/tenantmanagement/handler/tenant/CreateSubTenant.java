@@ -1,4 +1,4 @@
-package io.radien.tenantmanagement.handler;
+package io.radien.tenantmanagement.handler.tenant;
 
 import io.radien.tenantmanagement.event.TenantEvent;
 import java.util.UUID;

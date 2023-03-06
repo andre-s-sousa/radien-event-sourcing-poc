@@ -28,8 +28,8 @@ import software.amazon.awssdk.services.sqs.SqsClient;
 
 @ApplicationScoped
 @Startup
-public class SqsSubscriptionProducer {
-    private static final Logger logger = LoggerFactory.getLogger(SqsSubscriptionProducer.class);
+public class ActiveTenantSqsSubscriptionProducer {
+    private static final Logger logger = LoggerFactory.getLogger(ActiveTenantSqsSubscriptionProducer.class);
 
     @Inject
     SqsClient sqs;
@@ -38,7 +38,7 @@ public class SqsSubscriptionProducer {
     @Inject
     EventCheckpointRepository checkpointRepository;
 
-    @ConfigProperty(name = "io.radien.sqs.queue.url")
+    @ConfigProperty(name = "io.radien.sqs.queue.url.activeTenant")
     String queueUrl;
 
     private EventStoreDBSubscriptionOptions subscriptionOptions;
@@ -67,7 +67,7 @@ public class SqsSubscriptionProducer {
 
     @PostConstruct
     public void subscribeToAll() {
-        subscribeToAll(EventStoreDBSubscriptionOptions.getByStreamPrefix("Tenant"));
+        subscribeToAll(EventStoreDBSubscriptionOptions.getByStreamPrefix("ActiveTenant"));
     }
 
     @PreDestroy
@@ -113,7 +113,7 @@ public class SqsSubscriptionProducer {
             // then we might get events that are from other module, and we might not be able to deserialize them.
             // In that case it's safe to ignore deserialization error.
             // You may add more sophisticated logic checking if it should be ignored or not.
-            logger.warn("Couldn't deserialize event with id: %s".formatted(event.getEvent().getEventId()));
+            logger.warn("Couldn't deserialize event with id: %s %s".formatted(event.getEvent().getEventId(), event.getEvent().getEventType()));
 
             if (!subscriptionOptions.ignoreDeserializationErrors())
                 throw new IllegalStateException(

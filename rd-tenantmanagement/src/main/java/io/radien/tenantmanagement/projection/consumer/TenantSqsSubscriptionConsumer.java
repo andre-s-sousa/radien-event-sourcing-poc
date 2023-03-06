@@ -23,8 +23,8 @@ import software.amazon.awssdk.services.sqs.SqsAsyncClient;
 import software.amazon.awssdk.services.sqs.model.ReceiveMessageResponse;
 
 @ApplicationScoped
-public class SqsSubscriptionConsumer {
-    private final Logger logger = LoggerFactory.getLogger(SqsSubscriptionConsumer.class);
+public class TenantSqsSubscriptionConsumer {
+    private final Logger logger = LoggerFactory.getLogger(TenantSqsSubscriptionConsumer.class);
 
     static final ObjectReader ENVELOPE_READER = new ObjectMapper()
             .registerModule(new JavaTimeModule())
@@ -33,7 +33,7 @@ public class SqsSubscriptionConsumer {
     @ConfigProperty(name = "sqs.consumer.maxFetchedMessages")
     int maxFetchedEvents;
 
-    @ConfigProperty(name = "io.radien.sqs.queue.url")
+    @ConfigProperty(name = "io.radien.sqs.queue.url.tenant")
     String queueUrl;
     @ConfigProperty(name = "io.radien.sqs.queue.wait_time", defaultValue = "10")
     Integer waitTime;
@@ -53,7 +53,7 @@ public class SqsSubscriptionConsumer {
                             int newEventsCount = response.messages().size();
                             if (newEventsCount > 0) {
                                 logger.info("$newEventsCount message(s) fetched");
-                                eventBus.send("sqsEvents", response);
+                                eventBus.send("sqsEvents_tenant", response);
                             }
                         },
                         err -> logger.error("Error fetching messages!", err)
@@ -64,7 +64,7 @@ public class SqsSubscriptionConsumer {
         return client.receiveMessage(m -> m.queueUrl(queueUrl).maxNumberOfMessages(maxFetchedEvents).waitTimeSeconds(waitTime));
     }
 
-    @ConsumeEvent(value = "sqsEvents", ordered = true)
+    @ConsumeEvent(value = "sqsEvents_tenant", ordered = true)
     Uni<Void> processReceivedMessageResponse(ReceiveMessageResponse messageResponse) {
         return Uni.createFrom()
                 .item(messageResponse)

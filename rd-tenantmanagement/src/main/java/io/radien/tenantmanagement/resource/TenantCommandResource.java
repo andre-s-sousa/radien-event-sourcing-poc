@@ -3,18 +3,18 @@ package io.radien.tenantmanagement.resource;
 import io.netty.util.internal.StringUtil;
 import io.radien.eventsourcing.core.ETag;
 import io.radien.tenantmanagement.command.TenantCommands;
-import io.radien.tenantmanagement.handler.CreateClientTenant;
-import io.radien.tenantmanagement.handler.CreateRootTenant;
-import io.radien.tenantmanagement.handler.CreateSubTenant;
-import io.radien.tenantmanagement.handler.DeleteTenant;
-import io.radien.tenantmanagement.handler.UpdateTenantClientAddress;
-import io.radien.tenantmanagement.handler.UpdateTenantClientCity;
-import io.radien.tenantmanagement.handler.UpdateTenantClientCountry;
-import io.radien.tenantmanagement.handler.UpdateTenantClientEmail;
-import io.radien.tenantmanagement.handler.UpdateTenantClientPhoneNumber;
-import io.radien.tenantmanagement.handler.UpdateTenantClientZipCode;
-import io.radien.tenantmanagement.handler.UpdateTenantKey;
-import io.radien.tenantmanagement.handler.UpdateTenantName;
+import io.radien.tenantmanagement.handler.tenant.CreateClientTenant;
+import io.radien.tenantmanagement.handler.tenant.CreateRootTenant;
+import io.radien.tenantmanagement.handler.tenant.CreateSubTenant;
+import io.radien.tenantmanagement.handler.tenant.DeleteTenant;
+import io.radien.tenantmanagement.handler.tenant.UpdateTenantClientAddress;
+import io.radien.tenantmanagement.handler.tenant.UpdateTenantClientCity;
+import io.radien.tenantmanagement.handler.tenant.UpdateTenantClientCountry;
+import io.radien.tenantmanagement.handler.tenant.UpdateTenantClientEmail;
+import io.radien.tenantmanagement.handler.tenant.UpdateTenantClientPhoneNumber;
+import io.radien.tenantmanagement.handler.tenant.UpdateTenantClientZipCode;
+import io.radien.tenantmanagement.handler.tenant.UpdateTenantKey;
+import io.radien.tenantmanagement.handler.tenant.UpdateTenantName;
 import io.radien.tenantmanagement.service.TenantCommandBusinessService;
 import java.util.UUID;
 import javax.inject.Inject;
@@ -26,7 +26,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path("/user/command")
+@Path("/tenant/command")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class TenantCommandResource {
